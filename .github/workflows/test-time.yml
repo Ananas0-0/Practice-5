@@ -28,7 +28,7 @@ jobs:
         run: |
           source venv/bin/activate
           python app.py &
-          sleep 3
+          sleep 5
       
       - name: Test /time endpoint
         run: |
@@ -42,10 +42,10 @@ jobs:
             echo "Test PASSED"
           fi
       
-      - name: Stop app
-        run: pkill -f "python app.py" || true
-      
       - name: Test /metrics endpoint
         run: |
           source venv/bin/activate
-          python -m unittest test.test_metrics
+          python test/test_metrics.py
+      
+      - name: Stop app
+        run: pkill -f "python app.py" || true
