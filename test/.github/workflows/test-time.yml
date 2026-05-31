@@ -1,0 +1,36 @@
+name: Test /time endpoint
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+      - 'dev'
+  pull_request:
+    branches:
+      - 'dev'
+
+jobs:
+  test:
+    runs-on: self-hosted  # использует ваш раннер
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install requests
+      
+      - name: Run Flask app in background
+        run: |
+          python src/app/app.py &
+          sleep 3  # ждём запуска
+      
+      - name: Run tests
+        run: python -m unittest discover test
