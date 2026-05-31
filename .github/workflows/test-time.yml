@@ -45,3 +45,8 @@ jobs:
       
       - name: Stop app
         run: pkill -f "python app.py" || true
+      
+      - name: Test /metrics endpoint
+        run: |
+          source venv/bin/activate
+          python -m unittest test.test_metrics
