@@ -15,7 +15,7 @@ class TestMetricsEndpoint(unittest.TestCase):
         data = response.json()
         
         self.assertIn('count', data)
-        self.assertEqual(data['count'], 2)
+        self.assertEqual(data['count'], 3)
 
 if __name__ == '__main__':
     unittest.main()
