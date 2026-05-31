@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    runs-on: self-hosted  # использует ваш раннер
+    runs-on: self-hosted
     
     steps:
       - name: Checkout code
@@ -29,8 +29,8 @@ jobs:
       
       - name: Run Flask app in background
         run: |
-          python src/app/app.py &
-          sleep 3  # ждём запуска
+          python app.py &      # ← путь исправлен (было src/app/app.py)
+          sleep 3
       
       - name: Run tests
         run: python -m unittest discover test
